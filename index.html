@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; connect-src 'self' https://ig.gov-cloud.ai;">
+    <title>agent interface</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./prompt.js" defer></script>
+    <script src="./chatBot.js" defer></script>
+</head>
+
+<body>
+    <div class="mainContainer">
+        <div class="leftContainer">
+            <dropdown-component></dropdown-component>
+        </div>
+        <div class="middleCont">
+            <file-chat-bot></file-chat-bot>
+        </div>
+        <div class="rightCont">
+            <!-- <div>button</div> -->
+        </div>
+    </div>
+
+    <script>
+        // document.addEventListener("DOMContentLoaded", () => {
+        //     const dropdown = document.querySelector("dropdown-component");
+        //     const chatBot = document.querySelector("file-chat-bot");
+
+        //     dropdown.addEventListener("agentSessionSelected", (event) => {
+        //         const { agentId, sessionId } = event.detail;
+        //         console.log("Selected Agent ID:", agentId);
+        //         console.log("Selected Session ID:", sessionId);
+
+        //         if (chatBot) {
+        //             chatBot.setAgentSession(agentId, sessionId);
+        //         }
+        //     });
+        // });
+
+        document.addEventListener("DOMContentLoaded", () => {
+        const dropdown = document.querySelector("dropdown-component");
+        const chatBot = document.querySelector("file-chat-bot");
+
+        dropdown.addEventListener("agentSessionSelected", (event) => {
+            const { agentId } = event.detail;
+            console.log("Selected Agent ID:", agentId);
+
+            if (chatBot) {
+                chatBot.setAgentId(agentId); // Updated to only pass agentId
+            }
+        });
+    });
+    </script>
+</body>
+
+</html> 
