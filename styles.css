@@ -1,10 +1,12 @@
 .mainContainer{
+  position: fixed;
     width: 100vw;
     display: flex;
     height: 100vh;
     
 }
 .leftContainer{
+  padding-top: 5vh;
     height: 100%;
     width: 20%;
     /* border: 1px solid blue; */
@@ -12,7 +14,13 @@
 .middleContainer{
     width: 60%;
     height: 100%;
+    display: flex;
+    align-items: end;
+    justify-content: center;
     /* border: 1px solid blue; */
+}
+.selectChild{
+  padding: 4px;
 }
 
 .rightContainer{
@@ -26,11 +34,15 @@ select {
     padding: 10px; /* Add padding for dropdown itself */
     font-size: 16px; /* Text size */
     border: 1px solid #d6dae1; /* Outer border */
+    border: 1px solid blue; /* Outer border */
     border-radius: 5px; /* Rounded edges */
     background-color: #fff; /* Background color */
     color: #333; /* Text color */
     cursor: pointer; /* Pointer cursor */
     appearance: none; /* Remove default dropdown styling */
+}
+.selectCont{
+  padding: 15px !important;
 }
 
 select:focus {
@@ -44,17 +56,27 @@ select option {
     padding:  8px 16px; /* Spacing inside each option */
     border: 1px solid#d6dae1; /* Option border */
     background-color: #fff; /* Option background */
+  
     color: #333; /* Text color */
 }
 
 select option:hover {
     background-color: #f0f0f0; /* Slight hover effect */
+   
+}
+
+option {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+option::-webkit-scrollbar {
+  display: none;
 }
 
 
 .chatContainer {
-  width: 100%;
-  max-width: 600px;
+  width: 50vw;
+  max-width: 50vw;
   margin: 50px auto;
   border: 1px solid #dcdcdc;
   max-height: 80vh;
@@ -65,10 +87,10 @@ select option:hover {
   overflow-y: auto;
   font-family: Arial, sans-serif;
  
-  position: fixed;
+  /* position: fixed;
   left: 50%;
   bottom: 6vh;
-  transform: translateX(-50%);
+  transform: translateX(-50%); */
 
 
 }
@@ -85,7 +107,7 @@ select option:hover {
   border-bottom: 1px solid #ddd;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 40px;
   user-select: text;
   /* border: 1px solid green; */
 }
@@ -126,19 +148,26 @@ select option:hover {
   font-size: 15px;
   display: flex;
   align-items: center;
-  gap:0.8vw;
+  /* gap:0.8vw; */
   font-weight: 400;
   line-height: 41px;
   position: relative;
 }
-.message-meta {
+.messageMeta {
     position:absolute ;
+    /* border: 1px solid black; */
     font-size: 12px;
     color: #888;
+    padding: 0;
+    height: 3vh;
+    margin: 0;
+    text-align: right;
     text-wrap: nowrap;
     display: flex;
-    flex-direction: column;
-    bottom: -4vh;
+    justify-content: right;
+    /* flex-direction: column; */
+    gap: 2vw;
+    bottom: -2vh;
     right: 0;
     /* margin-top: 5px; */
 }
@@ -270,5 +299,4 @@ label:hover {
         transform: scale(1);
     }
 }
-
 

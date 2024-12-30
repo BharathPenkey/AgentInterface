@@ -46,14 +46,16 @@ class ChatBotComponent extends HTMLElement {
                                                 : msg.content
                                             }
                                         </div>
-                                        <div class="message-meta">   
-                                            <span>${
-                                              msg.createdAt
-                                                ? this.formatCreatedAt(
-                                                    msg.createdAt.split(".")[0]
-                                                  )
-                                                : ""
-                                            }</span>
+                                        <div class="messageMeta">   
+                                        ${msg.caller !="null" ? `<span> ${msg.nameVal} called </span>` : ""}
+                                        ${msg.toolName!="Unknown" ?`<span>${msg.type==="user"? "calling":"Response from"} ${msg.toolName} </span>`:"" }   
+                                        <span>${
+                                          msg.createdAt
+                                            ? this.formatCreatedAt(
+                                                msg.createdAt.split(".")[0]
+                                              )
+                                            : ""
+                                        }</span>
                                          
                                         </div>
                                     </div>
@@ -75,16 +77,15 @@ class ChatBotComponent extends HTMLElement {
         `;
   }
 
-  addMessage(content, type = "user", chatId = null, createdAt,caller,nameVal) {
+  addMessage(content, type = "user", chatId = null, createdAt,caller,nameVal,toolUse,toolName) {
     this.chatArray.push({
       content,
       type,
       chatId,
       createdAt: createdAt,
-    //   isToolUsed,
-    //   agent:agent,
       caller,
-      nameVal
+      nameVal,
+      toolUse,toolName
     });
     console.log("chatArray", JSON.stringify(this.chatArray))
     this.render();
@@ -159,8 +160,8 @@ class ChatBotComponent extends HTMLElement {
       const data = await response.json();
   
       if (data.status === "success") {
-        // console.log("Data fetched successfully:", data);
-        console.log("nameID",data.model?.data[0].entity.name)
+        console.log("Data fetched successfully:", data);
+        console.log("nameIDB",data.model?.data[0]?.entity?.name)
         var nameVal = data.model?.data[0].entity.name;
         return nameVal
       } else {
@@ -170,8 +171,6 @@ class ChatBotComponent extends HTMLElement {
       console.error("Error fetching data:", error);
     }
   }
-  
-  
   
   // interact apai
 
@@ -198,72 +197,55 @@ class ChatBotComponent extends HTMLElement {
     //   console.log("historyData",data)
 
       if (data.status === "success") {
+        // const items = data.model.data;
         const items = data.model.data;
         console.log("historyDataitems",items)
-        items.forEach((item) => {
-          const unixTimestamp = item.creationTimeMs;
-          const dateObject = new Date(unixTimestamp);
 
-          // Format the date to a readable string
-          const humanReadableDate = dateObject.toLocaleString("en-US", {
-            timeZone: "UTC", // Optional: Adjust for a specific timezone if needed
-            hour12: true, // Optional: For 12-hour format
-          });
-
-          console.log("Creation Time (Human-Readable):", humanReadableDate);
-
-          // console.log("Creation Time (ms):", item.creationTimeMs);
+        for (const item of items) {
           const {
             prompt,
             response,
             createdAt,
             promptId,
-            toolUses,
-            isHuman: originalIsHuman,
-            caller
+            caller,
+            toolUses
           } = item.entity;
-
-          console.log("callerView:", caller);
-          console.log("Prompt:", prompt);
-          console.log("Response:", response);
-          console.log("Created At:", createdAt);
-          console.log("toolUses:", toolUses);
-
-        //   let nameVal = "Unknown";
-        // if (caller) {
-        //     this.makeApiCall(caller).then(resolvedName => {
-        //         nameVal = resolvedName;
-        //         console.log(`Caller1: ${caller}, Name: ${nameVal}`);
-        //       });
-        // }
-
-        let nameVal = "Unknown";
-        if (caller) {
-        //   nameVal = await this.makeApiCall(caller);
+  
+          // Fetch the name for the caller if present
+          let nameVal = "null";
+          let subAgent ="null ";
+          let toolUse ="null " ;
+          let toolName ="Unknown";
+          if (caller != nameVal) {
+           nameVal = await this.makeApiCall(caller);
+            console.log(`Caller: ${caller}, NameId: ${nameVal}`);
+          }else{
+         
+          if (toolUses.toolUsed != "null ") {
+            toolUse = toolUses.toolUsed;
+        
+            if (toolUses.toolOutput != "null ") {
+                toolName = toolUses.toolOutput;
+                
+                const matchResult = toolName.match(/`agentName`:`([^`]+)`/);
+                if (matchResult && matchResult[1]) {
+                    toolName = matchResult[1];
+                } else {
+                    console.error("No agentName found in toolOutput.");
+                    toolName = "Unknown"; // Assign a default value if not found
+                }
+            }
+        
+            console.log("toolusedview", toolUses.toolUsed, "subAgent", toolName);
         }
-          console.log(`Caller1: ${caller}, Name: ${nameVal}`);
-          //   console.log("isHuman:", isHuman);
-          // Determine if the interaction is human
-        //   let agent = true;
-        //   console.log("Initial agent:", agent);
-          
-        //   if (toolUses?.toolUsed == null) {
-        //     agent = false;
-        //     console.log("Condition met - agent set to false");
-        //   }
-          
-        //   console.log("Final agent value:", agent);
-          
-            // Log updated and original isHuman status
-            // console.log("isHumanStatus:", agent);
-            console.log("Original isHuman:", originalIsHuman);
-            console.log("toolUses.toolInput:", toolUses.toolInput);
-            console.log("toolUses.toolOutput:", toolUses.toolOutput?.status);
-            console.log("toolUses.toolUsed:", toolUses.toolUsed);
-            this.addMessage(prompt, "user", promptId, createdAt,caller,nameVal);
-            
-            this.addMessage(response, "bot", promptId, createdAt,caller,nameVal);
-        });
+    }
+  
+          // Add messages with the resolved name
+          this.addMessage(prompt, "user", promptId, createdAt, caller, nameVal,toolUse,toolName);
+          this.addMessage(response, "bot", promptId, createdAt, caller, nameVal,toolUse,toolName);
+        }
+      
+    
       } else {
         console.error("Failed to fetch data:", data.msg);
       }
