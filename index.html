@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; connect-src 'self' https://ig.gov-cloud.ai;">
-    <title>agent interface</title>
+    <title>Chatbot Component ui</title>
     <link rel="stylesheet" href="./styles.css" />
     <script src="./prompt.js" defer></script>
     <script src="./chatBot.js" defer></script>
@@ -15,12 +15,15 @@
 <body>
     <div class="mainContainer">
         <div class="leftContainer">
-            <dropdown-component></dropdown-component>
+            <div class="selectChild">
+
+                <dropdown-component></dropdown-component>
+            </div>
         </div>
-        <div class="middleCont">
+        <div class="middleContainer">
             <file-chat-bot></file-chat-bot>
         </div>
-        <div class="rightCont">
+        <div class="rightContainer">
             <!-- <div>button</div> -->
         </div>
     </div>
@@ -57,4 +60,4 @@
     </script>
 </body>
 
-</html> 
+</html>
