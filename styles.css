@@ -416,3 +416,43 @@ label:hover {
 }
 
 
+/* <style> */
+:host {
+  display: block;
+  margin: 0 auto;
+  max-width: 300px;
+}
+
+select {
+  width: 70%;
+  padding: 8px;
+  margin-bottom: 16px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.6);
+}
+
+option {
+  padding: 8px;
+  background-color: #fff;
+  color: #333;
+}
+
+option:hover {
+  background-color: #f0f0f0;
+}
+/* </style> */
+
+
+ 
