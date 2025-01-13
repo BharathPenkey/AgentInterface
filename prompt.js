@@ -1,7 +1,7 @@
-
 class DropdownComponent extends HTMLElement {
-  historySchema = "67728644af1fd173800878f3";
+  historySchema =  "6780ec8b2028154e85126321"//"677f8ae42028154e8512622c";//677e9d662028154e8512607a
   AgentMasterSchema = "67641332f0cb545c5134cfdf";
+// toolused  6780f2a82028154e85126342
 
   constructor() {
     super();
@@ -50,7 +50,7 @@ class DropdownComponent extends HTMLElement {
     try {
       const requestBody = {
         type: "TIDB",
-        definition: `SELECT \`entity.sessionId\` AS sessionId, MAX(\`entity.createdAt\`) AS createdAt FROM \`t_${this.historySchema}_t\` WHERE \`entity.agentId\` = '${agentId}' GROUP BY \`entity.sessionId\` ORDER BY MAX(\`entity.createdAt\`) DESC;`,
+        definition: `SELECT \`entity.sessionId\` AS sessionId, MAX(\`entity.createdAt\`) AS createdAt FROM \`t_${this.historySchema}_t\` WHERE \`entity.agentId\` = '${agentId}' GROUP BY \`entity.sessionId\` ORDER BY MAX(\`entity.createdAt\`) DESC LIMIT 1000;`,
       };
 
       const response = await this.fetchData(this.sessionIdAdhocUri, requestBody);

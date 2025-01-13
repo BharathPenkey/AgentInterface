@@ -20,12 +20,12 @@
     /* border: 1px solid blue; */
 }
 
-.selectChild{
+/* .selectChild{
   padding: 4px;
   display: flex;
   flex-direction: column;
   gap: 5vw;
-}
+} */
 
 .rightContainer{
     height: 100%;
@@ -33,42 +33,45 @@
     /* border:1px solid green; */
 }
 /* Basic styles for the chatbot */
-select {
-    width: 20vw; /* Full width */
-    padding: 10px; /* Add padding for dropdown itself */
-    font-size: 16px; /* Text size */
-    border: 1px solid #d6dae1; /* Outer border */
-    border: 1px solid blue; /* Outer border */
-    border-radius: 5px; /* Rounded edges */
-    background-color: #fff; /* Background color */
-    color: #333; /* Text color */
-    cursor: pointer; /* Pointer cursor */
-    appearance: none; /* Remove default dropdown styling */
-}
-.selectCont{
+
+/* select {
+    width: 20vw; 
+    padding: 10px; 
+    font-size: 16px;
+    border: 1px solid #d6dae1; 
+    border: 1px solid blue; 
+    border-radius: 5px; 
+    background-color: #fff; 
+    color: #333;
+    cursor: pointer;
+    appearance: none; 
+} */
+
+/* .selectCont{
   padding: 15px !important;
+} */
+
+.audioIcon{
+  width: 1.5vw;
 }
 
-
-select:focus {
-    outline: none; /* Remove focus outline */
+/* select:focus {
+    outline: none; 
     border-color: #007bff; 
-}
+} */
 
-select option {
-    outline: 1px solid transparent; /* Prevent gaps affecting visuals */
-    margin: 8px; /* Outline gap (mimicking a gap effect) */
-    padding:  8px 16px; /* Spacing inside each option */
-    border: 1px solid#d6dae1; /* Option border */
-    background-color: #fff; /* Option background */
-  
-    color: #333; /* Text color */
-}
-
+/* select option {
+    outline: 1px solid transparent; 
+    margin: 8px; 
+    padding:  8px 16px;
+    border: 1px solid#d6dae1; 
+    background-color: #fff; 
+    color: #333; 
+} */
+/*   
 select option:hover {
-    background-color: #f0f0f0; /* Slight hover effect */
-   
-}
+    background-color: #f0f0f0;    
+} */
 
 option {
   scrollbar-width: none;
@@ -77,8 +80,6 @@ option {
 option::-webkit-scrollbar {
   display: none;
 }
-
-
 
 .chatContainer {
   width: 50vw;
@@ -92,13 +93,6 @@ option::-webkit-scrollbar {
   flex-direction: column;
   overflow-y: auto;
   font-family: Arial, sans-serif;
- 
-  /* position: fixed;
-  left: 50%;
-  bottom: 6vh;
-  transform: translateX(-50%); */
-
-
 }
 
 
@@ -110,7 +104,7 @@ option::-webkit-scrollbar {
   overflow-y: auto;
   height: 300px;
   background: #f9f9f9;
-  border-bottom: 1px solid #ddd;
+  /* border-bottom: 1px solid #ddd; */
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -130,7 +124,9 @@ option::-webkit-scrollbar {
     /* border: 1px solid blue; */
     flex: 1;
     display: flex;
+    /* flex-direction: column; */
     align-items: center;
+    justify-content: center;
 }
 
 .user-side {
@@ -140,6 +136,7 @@ option::-webkit-scrollbar {
 
 .bot-side {
     justify-content: flex-start;
+    align-items: center;
 }
 
 .message {
@@ -172,23 +169,22 @@ option::-webkit-scrollbar {
     text-align: right;
     text-wrap: nowrap;
     display: flex;
+    align-items: center;
     justify-content: right;
     /* flex-direction: column; */
-    gap: 2vw;
-    bottom: -3vh;
+    gap: 1vw;
+    bottom: -3.5vh;
     right: 0;
     /* margin-top: 5px; */
 }
 
 .user-message {
-    /* position: relative; */
-    /* margin-right: 2vw; */
-    /* border: 1px solid green; */
   align-self: flex-end;
 /* align-items: reverse; */
 /* flex-direction: column-reverse; */
   text-align: left;
   user-select: text;
+  align-items: center;
 }
 .userText:first-line {
     white-space: nowrap;
@@ -233,29 +229,51 @@ option::-webkit-scrollbar {
   border: 1px solid #dcdcdc;
   /* border: 1px solid green; */
   border-radius: 0.5vw;
-  padding: 5px;
+  /* padding: 5px; */
   font-size: 0.6vw;
 }
 .noartifactData{
   border: none;
+  /* border: 1px solid green; */
 }
 
 .userArtifactCont,.botArtifactCont{
   display: flex;
   flex-direction: column;
-  padding: 0;
   gap: 0;
-   /* display: flex; */
 }
-.innerDataCont{
+/* .innerDataCont{
   width: 14vw;
   display: flex;
+  margin: 0;
+  line-height: 1;
+  border: 1px solid black;
+  justify-content: flex-start;
+    align-items: center;
+  padding: 0;
+
+} */
+
+.innerDataCont {
+  width: 14vw;
+  display: flex;
+  margin: 0;
+  line-height: 1;
   /* border: 1px solid black; */
   justify-content: flex-start;
   align-items: center;
-  padding: 0;
-
+  padding: 3px 6px;
+  gap:1vw;
+  /* overflow: hidden; */
 }
+
+.innerDataCont > * {
+  margin: 0;
+  padding: 4px 0;
+  vertical-align: middle;
+}
+
+
 .keyName{
   width: 4vw;
   /* border: 1px solid black; */
@@ -263,7 +281,10 @@ option::-webkit-scrollbar {
   align-items: center;
 }
 .valueName{
+  word-wrap: break-word; /* Allow wrapping at word boundaries */
+  word-break: break-word; 
   font-weight: 200;
+  line-height: 1.5;
   color:#555;
 }
 .userAgentData{
@@ -275,19 +296,34 @@ option::-webkit-scrollbar {
   justify-content: right;
 
 }
-.favIcon{
+.favIcon,.speakerIcon{
     /* border: 1px solid blue; */ 
-    width: 2vw;
+    width: 1vw;
     height: 1vw;
     object-fit: contain;
     align-items: center;
     justify-content: center;
 }
+.humanAgentIcon{
+  width: 1vw;
+  object-fit: contain;
+}
+.speakerIcon{
+  width: 2vw;
+  position: absolute;
+object-fit: contain;
+right: 0;
+bottom: 0; 
+  /* right:5.6vw;
+  bottom: -3vh; */
+}
 
-.input-container {
+.inputContainer {
+  width: 95%;
   display: flex;
   padding: 10px;
   gap: 10px;
+  align-items: center;
   /* background: #fff; */
   /* background: #e8e9eb; */
 }
@@ -417,13 +453,12 @@ label:hover {
 
 
 /* <style> */
-:host {
+/* :host {
   display: block;
   margin: 0 auto;
   max-width: 300px;
-}
-
-select {
+} */
+/* .dropdownselect{
   width: 70%;
   padding: 8px;
   margin-bottom: 16px;
@@ -436,6 +471,29 @@ select {
   appearance: none;
   outline: none;
   cursor: pointer;
+} */
+
+select { 
+   width: 70%;
+  padding: 8px 0px;
+  /* margin-bottom: 16px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  appearance: none;
+  outline: none;
+  cursor: pointer; */
+} 
+
+
+.optionCont{
+  width: 90%;
+  padding:3vw;
+  border-radius :0.5vw;
+  /* background-color: green; */
 }
 
 select:focus {
@@ -443,16 +501,26 @@ select:focus {
   box-shadow: 0 0 4px rgba(0, 123, 255, 0.6);
 }
 
-option {
-  padding: 8px;
-  background-color: #fff;
-  color: #333;
+.optioncont{
+  width: 70%;
+  border: 1px solid black;
 }
 
 option:hover {
   background-color: #f0f0f0;
 }
-/* </style> */
+
+.customOption{
+  display: flex;
+  border: 1px solid back;
+
+  /* background-color: green; */
+
+  
+  margin:3px 0px;
+
+  padding: 4px ;
+} 
 
 
  
