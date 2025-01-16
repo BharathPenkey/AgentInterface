@@ -1584,3 +1584,130 @@ class ChatBotComponent extends HTMLElement {
   
 </body>
 </html> */}
+
+
+// <!-- <!DOCTYPE html>
+// <html lang="en">
+
+// <head>
+//   <meta charset="UTF-8">
+//   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//   <meta http-equiv="Content-Security-Policy"
+//     content="default-src 'self'; script-src 'self' 'unsafe-inline'; connect-src 'self' https://ig.gov-cloud.ai;">
+//   <title>live</title>
+//   <link rel="stylesheet" href="./styles.css">
+//   <script src="./prompt.js" defer></script>
+//   <script src="./chatBot.js" defer></script>
+//   <style>
+//   </style>
+// </head>
+
+// <body>
+//   <div class="mainContainer">
+//     <div class="leftContainer">
+//       <dropdown-component></dropdown-component>
+//       <select id="agentDropdown" >
+//         <option value="" class="optionCont">Select an Agent</option>
+//       </select>
+//       <div id="sessionList">
+
+//       </div>
+//     </div>
+//     <div class="middleContainer">
+//       <file-chat-bot></file-chat-bot>
+//     </div>
+//   </div>
+
+//   <script>
+//     document.addEventListener("DOMContentLoaded", () => {
+//       const dropdownComponent = document.querySelector("dropdown-component");
+//       const agentDropdown = document.getElementById("agentDropdown");
+//       const sessionList = document.getElementById("sessionList");
+//       const chatBot = document.querySelector("file-chat-bot");
+
+//       // Variable to store the selected agent ID
+//       let selectedAgentId = "";
+
+//       // Listen for agents fetched event
+//       dropdownComponent.addEventListener("agentsFetched", (event) => {
+//         const { agents } = event.detail;
+//         console.log("Agents received:", agents);
+
+//         // Sort agents alphabetically by name
+//         agents.sort((a, b) => a.name.localeCompare(b.name));
+
+//         // Populate the agent dropdown
+//         agentDropdown.innerHTML = `<option value="" >Select an Agent</option>`;
+//         agents.forEach((agent) => {
+//           const option = document.createElement("option");
+//           option.className = "customOption";
+//           option.value = agent.id;
+//           option.textContent = agent.name.length > 30 ? `${agent.name.slice(0, 30)}...` : agent.name;
+//           agentDropdown.appendChild(option);
+//         });
+//       });
+
+//       // Handle agent selection
+//       agentDropdown.addEventListener("change", (event) => {
+//         selectedAgentId = event.target.value; // Update the selected agent ID
+//         console.log("Selected agent ID:", selectedAgentId);
+//         sessionList.innerHTML = ""; // Clear previous session list
+//         if (chatBot) {
+//           chatBot.clearChatHistory(); // Clear chat history when agent changes
+//         }
+
+//         if (selectedAgentId) {
+//           dropdownComponent.fetchSessions(selectedAgentId);
+//         }
+//       });
+
+//       // Listen for sessions fetched event
+//       dropdownComponent.addEventListener("sessionsFetched", (event) => {
+//         const { agentId, sessions } = event.detail;
+//         console.log(`Sessions received for agent ${agentId}:`, sessions);
+
+//         sessionList.innerHTML = ""; // Clear previous sessions
+//         if (!sessions || sessions.length === 0) {
+//           const noSessionsMessage = document.createElement("div");
+//           noSessionsMessage.className = "no-sessions-message";
+//           noSessionsMessage.textContent = "No session IDs available.";
+//           sessionList.appendChild(noSessionsMessage);
+//         } else {
+//           sessions.forEach((session) => {
+//             const sessionDiv = document.createElement("div");
+//             sessionDiv.className = "session-div";
+//             sessionDiv.dataset.sessionId = session.id;
+//             sessionDiv.textContent = session.name;
+//             sessionList.appendChild(sessionDiv);
+//           });
+//         }
+//       });
+
+//       // Handle session selection
+//       sessionList.addEventListener("click", (event) => {
+//         const sessionDiv = event.target.closest(".session-div");
+//         if (sessionDiv) {
+//           const sessionId = sessionDiv.dataset.sessionId;
+//           console.log("Selected Session ID:", sessionId);
+
+//           const allSessionDivs = sessionList.querySelectorAll(".session-div");
+//           allSessionDivs.forEach((div) => div.classList.remove("selected"));
+
+
+//           // Add 'selected' class to the clicked session div
+//           sessionDiv.classList.add("selected");
+
+//           // Notify ChatBotComponent of selected session
+//           if (chatBot && selectedAgentId) {
+//             chatBot.setAgentSession(selectedAgentId, sessionId);
+//           } else {
+//             console.error("Agent ID is not selected or ChatBotComponent is missing.");
+//           }
+//         }
+//       });
+//     });
+//   </script>
+
+// </body>
+
+// </html> -->

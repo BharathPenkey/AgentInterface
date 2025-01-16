@@ -296,7 +296,7 @@ option::-webkit-scrollbar {
   justify-content: right;
 
 }
-.favIcon,.speakerIcon{
+.favIcon,.speakerIcon,.artifactStoreIcon{
     /* border: 1px solid blue; */ 
     width: 1vw;
     height: 1vw;
