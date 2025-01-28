@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +18,7 @@
   <div class="mainContainer">
     <div class="leftContainer">
       <dropdown-component></dropdown-component>
-      <select id="agentDropdown" >
+      <select id="agentDropdown">
         <option value="" class="optionCont">Select an Agent</option>
       </select>
       <div id="sessionList">
@@ -49,6 +48,16 @@
         // Sort agents alphabetically by name
         agents.sort((a, b) => a.name.localeCompare(b.name));
 
+        // // Populate the agent dropdown
+        // agentDropdown.innerHTML = `<option value="" >Select an Agent</option>`;
+        // agents.forEach((agent) => {
+        //   const option = document.createElement("option");
+        //   option.className = "customOption";
+        //   option.value = agent.id;
+        //   option.textContent = agent.name.length > 30 ? `${agent.name.slice(0, 30)}...` : agent.name;
+        //   agentDropdown.appendChild(option);
+        // });
+
         // Populate the agent dropdown
         agentDropdown.innerHTML = `<option value="" >Select an Agent</option>`;
         agents.forEach((agent) => {
@@ -56,6 +65,7 @@
           option.className = "customOption";
           option.value = agent.id;
           option.textContent = agent.name.length > 30 ? `${agent.name.slice(0, 30)}...` : agent.name;
+          option.title = agent.name; // Set the full name as the tooltip
           agentDropdown.appendChild(option);
         });
       });
